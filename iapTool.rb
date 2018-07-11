@@ -10,6 +10,7 @@ def modify_iap_demo(app = nil, filePath, str)
   #解析csv得到内购商品
   p_array = parase_csv_file(filePath)
   for mode in p_array do
+    puts "正在修改商品 #{mode}"
     purch = app.in_app_purchases.find(mode["id"])
     e = purch.edit
     e.versions = {
@@ -19,6 +20,7 @@ def modify_iap_demo(app = nil, filePath, str)
         }
       }
     e.save!
+    puts "修改成功"
   end
   
 end
@@ -26,8 +28,6 @@ end
 
 # 批量创建商品
 def create_iap(app = nil, iapMode)
-
-  puts iapMode
 
   iapType = get_correct_iapType(iapMode["type"])
 
@@ -39,6 +39,7 @@ def create_iap(app = nil, iapMode)
 
   description = iapMode["describe"] 
 
+  puts "正在上传商品 #{iapMode}"
   app.in_app_purchases.create!(
     type: iapType, 
     versions: {
@@ -62,6 +63,7 @@ def create_iap(app = nil, iapMode)
       }
     ]  
   )
+  puts "上传成功"
 end
 
 # 获取到对应的商品类型
@@ -132,8 +134,8 @@ def create_iap_demo(app = nil, filePath)
 end
 
 # 执行
-# create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
-modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '..')
+create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
+# modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
 
 
 
