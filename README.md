@@ -76,7 +76,7 @@ app.in_app_purchases.create!(
   )
 ```
 
-其中对应语言地区代码可以参考：
+其中对应语言地区代码可以参考：[对照表](https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/doc/%E8%AF%AD%E8%A8%80%E5%9C%B0%E5%8C%BA%E4%BB%A3%E7%A0%81%E8%A1%A8.txt)
 
 
 2.若很不巧你的 app 被苹果打回了，你新加的商品也被打回需要开发者操作，你就可以使用
