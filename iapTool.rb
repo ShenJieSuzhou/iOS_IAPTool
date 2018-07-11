@@ -1,35 +1,35 @@
 require 'spaceship'
 require 'csv'
 
-Spaceship::Tunes.login("helmut@januschka.com")
-app = Spaceship::Application.find("hjanuschka.sticker-test")
+Spaceship::Tunes.login("snaildsi@qq.com")
+app = Spaceship::Application.find("com.snailgames.testhuxudong")
 
+# 批量修改被打回的商品
+def modify_iap_demo(app = nil, filePath, str)
 
-
-def modify_iap_demo(app = nil)
-  purch = app.in_app_purchases.find("spanish.app.idf.demo")
-  e = purch.edit
-  e.review_notes = "1Review Notes with atleast 10 characters"
-  e.review_screenshot = "/Users/hja/Desktop/review.png"
-  e.versions = {
-        'en-US': {
-          name: "Edit It1",
-          description: "Description has at least 10 characters"
-        },
-        'es-ES': {
-          name: "1test name es-ES",
-          description: "German has at least 10 characters"
-        },
-        'es-US'
+  #解析csv得到内购商品
+  p_array = parase_csv_file(filePath)
+  for mode in p_array do
+    purch = app.in_app_purchases.find(mode["id"])
+    e = purch.edit
+    e.versions = {
+        'zh-CN': {
+          name: mode["name"],
+          description: mode["describe"] + str
+        }
       }
-  e.save!
+    e.save!
+  end
+  
 end
 
 
-# 创建商品
-def create_iap(iapMode)
+# 批量创建商品
+def create_iap(app = nil, iapMode)
 
-  iapType = get_correct_iapType(iapMode.["type"])
+  puts iapMode
+
+  iapType = get_correct_iapType(iapMode["type"])
 
   tier = get_correct_price(iapMode["price"])
 
@@ -51,7 +51,7 @@ def create_iap(iapMode)
     product_id: product_id,
     cleared_for_sale: true,
     review_notes: " ",
-    review_screenshot: "/Users/hja/Desktop/review.jpg", 
+    review_screenshot: "/Users/shenjie/Desktop/0x0ss.jpg", 
     pricing_intervals: 
     [
       {
@@ -61,18 +61,18 @@ def create_iap(iapMode)
         tier: tier
       }
     ]  
-
+  )
 end
 
 # 获取到对应的商品类型
 def  get_correct_iapType(type)
-  if type == "消耗品" [then]
+  if type == "消耗品" 
     return Spaceship::Tunes::IAPType::CONSUMABLE
-  elseif type == "费消耗品" [then]
+  elseif type == "费消耗品" 
     return Spaceship::Tunes::IAPType::NON_CONSUMABLE
-  elseif type == "非自动续订" [then] 
+  elseif type == "非自动续订" 
     return Spaceship::Tunes::IAPType::READABLE_NON_RENEWING_SUBSCRIPTION
-  elseif type == "自动续订" [then]
+  elseif type == "自动续订" 
     return Spaceship::Tunes::IAPType::READABLE_AUTO_RENEWABLE_SUBSCRIPTION
   end
 
@@ -119,21 +119,21 @@ def parase_csv_file(filePath)
 end
 
 # 开始创建ipa商品  
-def create_iap_demo(filePath)
+def create_iap_demo(app = nil, filePath)
   #解析csv得到内购商品
   p_array = parase_csv_file(filePath)
 
   #遍历创建商品
-  for i in p_array do
-    mode = p_array[i]
-    create_iap(mode)
+  mode = Hash.new
+  for mode in p_array do
+    create_iap(app, mode)
   end   
-)
 
 end
 
 # 执行
-create_iap_demo('/Users/shenjie/Desktop/ipaTest.csv')
+# create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
+modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '..')
 
 
 
