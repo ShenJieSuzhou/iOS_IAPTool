@@ -30,6 +30,11 @@ xcode-select --install
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot3.png">
 
 # 开始使用
+在脚本的开头，需要配置你自己的账号与游戏信息
+```
+Spaceship::Tunes.login("your apple id")
+app = Spaceship::Application.find("your app bundleid")
+```
 
 在脚本最下面，有俩个调用方法，根据自己的需求俩者用其一
 ```
