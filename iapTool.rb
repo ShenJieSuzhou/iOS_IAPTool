@@ -25,31 +25,32 @@ def modify_iap_demo(app = nil)
   e.save!
 end
 
-def create_iap_demo(app = nil, filePath)
 
-  p_array = parase_csv_file(filePath)
-
-  for i in p_array do
-    mode = p_array[i]
-    create_iap(iapMode)
-  end   
-)
-
-end
-
+# 创建商品
 def create_iap(iapMode)
+
+  iapType = get_correct_iapType(iapMode.["type"])
+
+  tier = get_correct_price(iapMode["price"])
+
+  product_name = iapMode["name"]
+
+  product_id = iapMode["id"]
+
+  description = iapMode["describe"] 
+
   app.in_app_purchases.create!(
-    type: Spaceship::Tunes::IAPType::CONSUMABLE, 
+    type: iapType, 
     versions: {
-      'es-ES': {
-        name: "test name german1",
-        description: "German has at least 10 characters"
+      'zh-CN': {
+        name: product_name,
+        description: description
       }
     },
-    reference_name: "es_demo_es",
-    product_id: "spanish.app.idf.demo",
+    reference_name: product_name,
+    product_id: product_id,
     cleared_for_sale: true,
-    review_notes: "Some Review Notes here bla bla bla",
+    review_notes: " ",
     review_screenshot: "/Users/hja/Desktop/review.jpg", 
     pricing_intervals: 
     [
@@ -57,13 +58,36 @@ def create_iap(iapMode)
         country: "WW",
         begin_date: nil,
         end_date: nil,
-        tier: 1
+        tier: tier
       }
     ]  
 
 end
 
+# 获取到对应的商品类型
+def  get_correct_iapType(type)
+  if type == "消耗品" [then]
+    return Spaceship::Tunes::IAPType::CONSUMABLE
+  elseif type == "费消耗品" [then]
+    return Spaceship::Tunes::IAPType::NON_CONSUMABLE
+  elseif type == "非自动续订" [then] 
+    return Spaceship::Tunes::IAPType::READABLE_NON_RENEWING_SUBSCRIPTION
+  elseif type == "自动续订" [then]
+    return Spaceship::Tunes::IAPType::READABLE_AUTO_RENEWABLE_SUBSCRIPTION
+  end
 
+end
+
+
+# 获取到对应的商品价格登记
+def get_correct_price(price)
+  # 分割字符串 去除价格中所带的tier
+  tier = price.gsub("Tier", "")
+  return tier.strip
+end
+
+
+# 解析 csv 文件，返回 商品信息 数组
 def parase_csv_file(filePath)
   #数组用于存放解析过后的商品对象
   m_array = []
@@ -81,7 +105,7 @@ def parase_csv_file(filePath)
     m_describe = row[5]
 
     # key-value 设置
-    m_map["nme"] = m_productName
+    m_map["name"] = m_productName
     m_map["id"] = m_productID
     m_map["type"] = m_type
     m_map["price"] = m_price
@@ -94,9 +118,22 @@ def parase_csv_file(filePath)
 
 end
 
-parase_csv_file('/Users/shenjie/Desktop/ipaTest.csv')
+# 开始创建ipa商品  
+def create_iap_demo(filePath)
+  #解析csv得到内购商品
+  p_array = parase_csv_file(filePath)
 
-# create_iap_demo(app)
+  #遍历创建商品
+  for i in p_array do
+    mode = p_array[i]
+    create_iap(mode)
+  end   
+)
+
+end
+
+# 执行
+create_iap_demo('/Users/shenjie/Desktop/ipaTest.csv')
 
 
 
