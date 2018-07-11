@@ -26,6 +26,7 @@ xcode-select --install
 4. 执行你的脚本 ruby your_script_path 
 
 **注：excel 配置格式**
+
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot3.png">
 
 # 开始使用
@@ -33,12 +34,13 @@ xcode-select --install
 在脚本最下面，有俩个调用方法，根据自己的需求俩者用其一
 
 create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
+
 modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '.')
 
-创建 iap 商品时，传入配置好的 csv 文件，执行脚本
+1.创建 iap 商品时，传入配置好的 csv 文件，执行脚本
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot1.png">
 
-若很不巧你的 app 被苹果打回了，你新加的商品也被打回需要开发者操作，你就可以使用
+2.若很不巧你的 app 被苹果打回了，你新加的商品也被打回需要开发者操作，你就可以使用
 
 modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
 
