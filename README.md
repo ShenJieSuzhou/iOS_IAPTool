@@ -38,6 +38,7 @@ create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
 modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '.')
 
 1.创建 iap 商品时，传入配置好的 csv 文件，执行脚本
+
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot1.png">
 
 2.若很不巧你的 app 被苹果打回了，你新加的商品也被打回需要开发者操作，你就可以使用
@@ -45,7 +46,11 @@ modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '.')
 modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
 
 修改每个商品的描述，最简单的就是为其添加一个 ‘.’ 或者删除一个 ‘.’
+
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot2.png">
 
+# 其它
+
+该版本比较粗糙，但不影响正常使用，我会定期更新，如果你觉得很好，请给个 Star ✨。
 
 
