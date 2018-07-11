@@ -12,10 +12,14 @@ xcode-select --install
 [sudo] gem install fastlane -NV
 
 # 准备工作
+
+
 正常我们操作iap商品上传都是这样的：
-a.策划同事将商品信息在 Excel 中配置好
-b.我们对照着表中的信息将iTunesconnect中的信息补全，点击保存
+1. 策划同事将商品信息在 Excel 中配置好
+2. 我们对照着表中的信息将iTunesconnect中的信息补全，点击保存
+
 很low 很浪费时间对吧！
+
 
 现在只需要下面几部，就可以解放你的双手
 a.将 excel 文件格式转换为 .csv 文件（文件另存为，选择.csv 文件即可），文件配置格式见下面
