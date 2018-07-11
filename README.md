@@ -37,14 +37,52 @@ create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
 
 modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '.')
 ```
-1.创建 iap 商品时，传入配置好的 csv 文件，执行脚本
+1.创建 iap 商品时，传入配置好的 csv 文件，选择 create_iap_demo 执行脚本
 
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot1.png">
 
+如果你有多个本地化操作，你可以在脚本中加入自定义的本地化：
+```
+app.in_app_purchases.create!(
+    type: iapType, 
+    versions: {
+      'zh-CN': {
+        name: product_name,
+        description: description
+      }，
+      'zh-CN': {
+        name: product_name,
+        description: description
+      }，
+      'zh-CN': {
+        name: product_name,
+        description: description
+      }
+    },
+    reference_name: product_name,
+    product_id: product_id,
+    cleared_for_sale: true,
+    review_notes: " ",
+    review_screenshot: "your review screenshot filePath", 
+    pricing_intervals: 
+    [
+      {
+        country: "WW",
+        begin_date: nil,
+        end_date: nil,
+        tier: tier
+      }
+    ]  
+  )
+```
+
+其中对应语言地区代码可以参考：
+
+
 2.若很不巧你的 app 被苹果打回了，你新加的商品也被打回需要开发者操作，你就可以使用
-
-modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
-
+```
+modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '.')
+```
 修改每个商品的描述，最简单的就是为其添加一个 ‘.’ 或者删除一个 ‘.’
 
 <img src="https://github.com/ShenJieSuzhou/iOS_IAPTool/blob/master/screenshot/screenshot2.png">
