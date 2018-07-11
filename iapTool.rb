@@ -1,8 +1,8 @@
 require 'spaceship'
 require 'csv'
 
-Spaceship::Tunes.login("snaildsi@qq.com")
-app = Spaceship::Application.find("com.snailgames.testhuxudong")
+Spaceship::Tunes.login("your apple id")
+app = Spaceship::Application.find("your app bundleid")
 
 # 批量修改被打回的商品
 def modify_iap_demo(app = nil, filePath, str)
@@ -52,7 +52,7 @@ def create_iap(app = nil, iapMode)
     product_id: product_id,
     cleared_for_sale: true,
     review_notes: " ",
-    review_screenshot: "/Users/shenjie/Desktop/0x0ss.jpg", 
+    review_screenshot: "your review screenshot filePath", 
     pricing_intervals: 
     [
       {
@@ -135,7 +135,7 @@ end
 
 # 执行
 create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
-# modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
+modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
 
 
 
