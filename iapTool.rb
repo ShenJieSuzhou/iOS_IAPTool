@@ -1,8 +1,8 @@
 require 'spaceship'
 require 'csv'
 
-Spaceship::Tunes.login("your apple id")
-app = Spaceship::Application.find("your app bundleid")
+Spaceship::Tunes.login("")
+app = Spaceship::Application.find("")
 
 # 批量修改被打回的商品
 def modify_iap_demo(app = nil, filePath, str)
@@ -52,7 +52,7 @@ def create_iap(app = nil, iapMode)
     product_id: product_id,
     cleared_for_sale: true,
     review_notes: " ",
-    review_screenshot: "your review screenshot filePath", 
+    review_screenshot: "", 
     pricing_intervals: 
     [
       {
@@ -68,14 +68,14 @@ end
 
 # 获取到对应的商品类型
 def  get_correct_iapType(type)
-  if type == "消耗品" 
+  if type == "消耗品"  
     return Spaceship::Tunes::IAPType::CONSUMABLE
-  elseif type == "费消耗品" 
+  elsif type == "非消耗品"
     return Spaceship::Tunes::IAPType::NON_CONSUMABLE
-  elseif type == "非自动续订" 
-    return Spaceship::Tunes::IAPType::READABLE_NON_RENEWING_SUBSCRIPTION
-  elseif type == "自动续订" 
-    return Spaceship::Tunes::IAPType::READABLE_AUTO_RENEWABLE_SUBSCRIPTION
+  elsif type == "非自动续订"
+    return Spaceship::Tunes::IAPType::NON_RENEW_SUBSCRIPTION
+  elsif type == "自动续订"
+    return Spaceship::Tunes::IAPType::RECURRING
   end
 
 end
@@ -134,8 +134,8 @@ def create_iap_demo(app = nil, filePath)
 end
 
 # 执行
-create_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv')
-modify_iap_demo(app, '/Users/shenjie/Desktop/mytest.csv', '。')
+create_iap_demo(app, '')
+modify_iap_demo(app, '', '。')
 
 
 
